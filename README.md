@@ -71,20 +71,21 @@ python postprocessing.py \
     --paraphrase_model_ckpts gpt-3.5-turbo-16k-0613 \
     --target_num_train_per_API 150 \
     --num_para_train_max 6 \
+    --save_file_name <your_save_file_name> \
     --if_visualize
 ```
 #### Fine-tuning & Inference
 ```
 cd llama-recipes/
 python data_proc_format.py \
-    --tool_file ft_datasets/tool_data_train_STE_full.json \
-    --data_save_dir ft_datasets/merged_data_STE_full.json \
+    --tool_file <your_save_file_name> \
+    --data_save_dir <your_data_directory> \
     --no_general \
     --add_tool_response
 
 CUDA_VISIBLE_DEVICES=0,1,2,3 torchrun --nnodes 1 --nproc_per_node 4 llama_finetuning.py \
     --enable_fsdp \
-    --model_name <YOUR_MODEL_DIRECTORY> \
+    --model_name <your_model_directory> \
     --num_epochs 2 \
     --batch_size_training 16 \
     --micro_batch_size 1 \
@@ -92,22 +93,21 @@ CUDA_VISIBLE_DEVICES=0,1,2,3 torchrun --nnodes 1 --nproc_per_node 4 llama_finetu
     --lr 2e-5 \
     --num_workers_dataloader 1 \
     --seed 42 \
-    --data_path ft_datasets/merged_data_STE_full.json \
+    --data_path <your_data_directory> \
     --max_words_dataset 2048 \
-    --checkpoint_folder <DIRECTORY_TO_SAVE> \
+    --checkpoint_folder <your_directory_to_save> \
     --save_with_hf \
     --warmup_ratio 0.03 \
     --save_epoch_interval 1 \
     --add_token_list ft_datasets/toolken_list_50.json
     
 CUDA_VISIBLE_DEVICES=0 python inference/inference_chat.py \
-    --model_name <YOUR_MODEL_DIRECTORY> \
+    --model_name <your_model_directory> \
     --data_path ft_datasets/tool_test.json \
-    --save_path <YOUR_SAVE_DIRECTORY> \
+    --save_path <your_save_directory> \
     --item_type query \
     --sys_msg_dir sys_msg_dir/sysmsg_tool.json \
     --quantization
-
 ```
 #### ICL
 First run ```demo_retrieve.ipynb``` to prepare retrieved demonstration examples.
@@ -120,19 +120,20 @@ python test_gpt.py \
     --setting ICL \
     --if_visualize
 ```
-- For Llama/Mistral:
+- For models based on Llama/Mistral:
 ```
 cd llama-recipes/
 CUDA_VISIBLE_DEVICES=0 python inference/inference_chat.py \
-    --model_name <YOUR_MODEL_DIRECTORY> \
+    --model_name <your_model_directory> \
     --data_path ft_datasets/tool_test_OTR_DR.json \
-    --save_path <YOUR_SAVE_DIRECTORY> \
+    --save_path <your_save_directory> \
     --item_type dialog \
     --sys_msg_dir sys_msg_dir/sysmsg_tool.json \
     --quantization
 ```
 
 ### Continual Learning with Rehearsal
+For round {0|1|2|3},
 ```
 cd llama-recipes/
 python data_proc_format.py \
@@ -145,7 +146,7 @@ python data_proc_format.py \
 
 CUDA_VISIBLE_DEVICES=0,1,2,3 torchrun --nnodes 1 --nproc_per_node 4  llama_finetuning.py \
     --enable_fsdp \
-    --model_name <YOUR_MODEL_DIRECTORY> \
+    --model_name <your_model_directory> \
     --num_epochs 2 \
     --batch_size_training 16 \
     --micro_batch_size 1 \
@@ -155,7 +156,7 @@ CUDA_VISIBLE_DEVICES=0,1,2,3 torchrun --nnodes 1 --nproc_per_node 4  llama_finet
     --seed 42 \
     --data_path ft_datasets/CL_round_{0|1|2|3}.json \
     --max_words_dataset 2048 \
-    --checkpoint_folder <DIRECTORY_TO_SAVE> \
+    --checkpoint_folder ft_datasets/CL_round_{0|1|2|3}.json \
     --save_with_hf \
     --warmup_ratio 0.03 \
     --save_epoch_interval 1 \
@@ -163,10 +164,9 @@ CUDA_VISIBLE_DEVICES=0,1,2,3 torchrun --nnodes 1 --nproc_per_node 4  llama_finet
 ```
 
 ### Evaluation
-```STE/evaluation.ipynb``` includes the cached evaluation results for all predictions files in ```STE/saved_results/```
+```STE/evaluation.ipynb``` includes the evaluation scripts and cached evaluation results for all predictions files in ```STE/saved_results/```
 
 ### Citation
-If you find our work helpful, please cite our ACL paper as follows.
 ```
 @misc{wang2024llm,
       title={LLMs in the Imaginarium: Tool Learning through Simulated Trial and Error}, 

@@ -15,6 +15,7 @@ def main(
     paraphrase_model_ckpts: str = 'gpt-35-turbo-16k',
     target_num_train_per_API: int = 150,
     num_para_train_max: int = 6,
+    save_file_name: str = 'tool_data_train.json',
     if_visualize: bool = True,
 ):
     with open(os.path.join(directory, "data_dict.json"), "r", encoding='utf-8') as f:
@@ -130,7 +131,7 @@ def main(
 
     random.shuffle(tool_data_train)
 
-    with open(os.path.join(directory, "tool_data_train.json"), "w", encoding='utf-8') as f:
+    with open(os.path.join(directory, save_file_name), "w", encoding='utf-8') as f:
         json.dump(tool_data_train, f)
 
 
