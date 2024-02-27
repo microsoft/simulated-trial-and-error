@@ -1,0 +1,7 @@
+*.DS_store
+__MACOSX/
+*.pyc
+**/__pycache__
+__pycache__
+.ipynb_checkpoints/
+.idea/

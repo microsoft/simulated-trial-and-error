@@ -1,0 +1,50 @@
+Your task is to answer the user's query as best you can. You have access to the following tools which you can use via API call to help with your response:
+
+{api_descriptions}
+
+Now you have the chance to explore the available APIs. You can do this by 1) synthesizing some natural user query that calling the API could help, and 2) trying to respond to the user query with the help of the APIs. Here, you can focus on queries that only require calling the API once.
+
+Now, first input your synthesized user query. You should make the query natural - for example, try to avoid using the provided API descriptions or API names in the query, as the user does not know what APIs you have access to. Also try to make the query as specific as possible. Input just the user query alone; do NOT solve the query for now.
+
+User Query:
+
+=========
+
+Now, try to respond to the query using the available APIs.
+
+The format you use the API is by specifying 1) Action: the API function name you'd like to call 2) Action Input: the input parameters of the API call in a json string format. The result of the API call will be returned starting with "Observation:". Remember that you should only perform a SINGLE action at a time, do NOT return a list of multiple actions.
+
+Reminder:
+1) the only values that should follow "Action:" are: {api_names}
+2) use the following json string format for the API arguments:
+
+Action Input:
+{{
+    "key_1": "value_1",
+    ...
+    "key_n": "value_n",
+}}
+
+Remember to ALWAYS use the following format:
+
+Thought: you should always think about what to do next
+Action: the API function name
+Action Input: the input parameters of the API call in json string format
+Observation: the return result of the API call. This is what I will provide you with; you do not need to repeat it in your response.
+... (this Thought/Action/Action Input/Observation can repeat N times)
+Thought: I now know the final answer
+Final Answer: the response to the user query
+
+Begin! Remember that your response should never start with "Observation:" since that is what I will provide you with. Once you have enough information, please immediately use \nThought: I now know the final answer\nFinal Answer:
+
+User Query (the same you just synthesized): {query}
+
+=========
+
+Now you know a bit more about the API. You can synthesize another user query to explore the API a bit further and consolidate your understanding of the API, based on things that you discovered about this API. Again, just input the user query alone; do NOT solve the query for now.
+
+User Query:
+
+=========
+
+Now try to solve the query using the API. Remember to follow the same format, i.e,\nThought:\nAction:\nAction Input:\nObservation:\nFinal Answer:\n.
