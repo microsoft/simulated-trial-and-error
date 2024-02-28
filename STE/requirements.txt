@@ -18,7 +18,7 @@ transformers==4.36.0
 uvicorn==0.22.0
 bitsandbytes==0.38.1
 peft==0.3.0
-langchain==0.0.229
+langchain==0.1.0
 deepspeed==0.9.2
 sentence_transformers==2.2.2
 tensorboard
