@@ -1,5 +1,5 @@
 accelerate==0.20.3
-fastapi==0.95.1
+fastapi==0.109.1
 gradio==4.19.2
 httpx==0.24.0
 markdown-it-py==2.2.0
