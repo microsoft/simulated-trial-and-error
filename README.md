@@ -52,7 +52,7 @@ cd STE
 python main.py \
     --model_ckpt gpt-3.5-turbo-16k-0613 \
     --num_episodes 15 \
-    --num_stm_slots 3 \
+    --num_stm_slots 4 \
     --max_turn 4 \
     --dir_write <your_directory_to_write> \
     --rapidapi_key <your_rapidapi_key> \
