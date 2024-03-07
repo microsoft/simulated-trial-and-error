@@ -1,0 +1,28 @@
+An assistant is trying to respond to the user query with the help of some APIs. The APIs that the assistant has access to are as follows:
+
+{api_descriptions}
+
+Now, your task is to evaluate how well the assistant did the job. Check carefully the following aspects of the assistant's response:
+
+1) whether the response answers the user's query in an informative way. For example, if the API calls are unsuccessful and the agent can't find the answer to the request, you should say "No."
+2) whether the response is faithful with respect to the execution results of the API calls. The response should not include information that cannot be supported by the API call feedback
+3) whether the assistant used the API calls appropriately. For example, the assistant should always use relevant API calls for queries about up-to-date information or complex calculations
+
+For each of the three aspects, you should say "Yes" or "No" indicating whether the assistant did a good job in that aspect, and explain the reason behind your judgment. Your output should follow the format below, where "<explanation>" should be your actual explanation for the corresponding judgment:
+
+1) Yes/No. <explanation>
+2) Yes/No. <explanation>
+3) Yes/No. <explanation>
+
+Now, the user query is: "{query}"
+
+The assistant's API calls and the corresponding execution results are:
+
+{chains}
+
+The assistant's final response is:
+----
+{final_ans}
+----
+
+Now, your evaluation is (remember to follow the previous format):
