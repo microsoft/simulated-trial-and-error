@@ -168,11 +168,13 @@ CUDA_VISIBLE_DEVICES=0,1,2,3 torchrun --nnodes 1 --nproc_per_node 4  llama_finet
 
 ### Citation
 ```
-@misc{wang2024llm,
+@misc{wang2024llms,
       title={LLMs in the Imaginarium: Tool Learning through Simulated Trial and Error}, 
       author={Boshi Wang and Hao Fang and Jason Eisner and Benjamin Van Durme and Yu Su},
       year={2024},
+      eprint={2403.04746},
       archivePrefix={arXiv},
-      primaryClass={cs.CL}
+      primaryClass={cs.CL},
+      url={https://arxiv.org/pdf/2403.04746.pdf}
 }
 ```
