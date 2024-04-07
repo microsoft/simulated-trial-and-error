@@ -67,7 +67,7 @@ def format_texts_single(dialog):
         "starting with user and alternating (u/a/u/a/u...)"
     )
     """
-    Please verify that yout tokenizer support adding "[INST]", "[/INST]" to your inputs.
+    Please verify that your tokenizer support adding "[INST]", "[/INST]" to your inputs.
     Here, we are adding it manually.
     """
     dialog_history = [
