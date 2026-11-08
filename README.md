@@ -75,6 +75,12 @@ python postprocessing.py \
     --if_visualize
 ```
 #### Fine-tuning & Inference
+Model and adapter loading requires safetensors weights (including
+`adapter_model.safetensors` for adapters); legacy pickle `.bin` weights are
+rejected. Convert legacy weights only in a trusted environment before using them
+here. Full model and optimizer `.pt` checkpoints are loaded as tensor-only
+state dictionaries.
+
 ```
 cd llama-recipes/
 python data_proc_format.py \
