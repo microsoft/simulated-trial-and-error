@@ -188,6 +188,7 @@ def save_model_checkpoint_hf(
         unwrap_model(model).save_pretrained(
             save_full_path,
             state_dict=cpu_state,
+            safe_serialization=True,
         )
         tokenizer.save_pretrained(save_full_path)
         print(f"model checkpoint & tokenizer saved for epoch {epoch} at {save_full_path}\n")
@@ -211,7 +212,7 @@ def load_model_checkpoint(model, rank, cfg, verbose=True):
         )
         return
 
-    model_checkpoint = torch.load(full_state_dict_model_path)
+    model_checkpoint = torch.load(full_state_dict_model_path, weights_only=True)
     # integrate into loaded model
     model.load_state_dict(model_checkpoint)
 
@@ -263,7 +264,7 @@ def load_optimizer_checkpoint(model, optimizer, rank, cfg):
     full_osd = None
 
     if rank == 0:
-        full_osd = torch.load(opt_file_path)
+        full_osd = torch.load(opt_file_path, weights_only=True)
 
         if cfg.verbose:
             print(f"loaded full osd on rank 0")
